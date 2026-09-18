@@ -14,447 +14,75 @@
       --accent-color: #2563eb;
       --accent-hover: #1d4ed8;
       --danger-color: #ef4444;
-      --success-color: #10b981;
       --shadow-sm: 0 1px 3px rgba(0,0,0,0.05);
       --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.1);
       --radius: 8px;
     }
 
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
+    * { box-sizing: border-box; margin: 0; padding: 0; }
     body {
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-      background-color: var(--bg-color);
-      color: var(--text-main);
-      line-height: 1.5;
-      padding-bottom: 60px;
+      background-color: var(--bg-color); color: var(--text-main); line-height: 1.5; padding-bottom: 60px;
     }
-
     header {
-      background-color: #ffffff;
-      border-bottom: 1px solid #e2e8f0;
-      padding: 12px 24px;
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      box-shadow: var(--shadow-sm);
+      background-color: #ffffff; border-bottom: 1px solid #e2e8f0; padding: 12px 24px; position: sticky; top: 0; z-index: 100; box-shadow: var(--shadow-sm);
     }
-
-    .header-container {
-      max-width: 1200px;
-      margin: 0 auto;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      flex-wrap: wrap;
-      gap: 12px;
-    }
-
-    .search-box {
-      position: relative;
-      flex: 1;
-      max-width: 400px;
-    }
-
-    .search-input {
-      width: 100%;
-      padding: 8px 16px 8px 36px;
-      border: 1px solid #cbd5e1;
-      border-radius: 20px;
-      font-size: 0.9rem;
-      outline: none;
-      transition: border-color 0.2s;
-    }
-
-    .search-input:focus {
-      border-color: var(--accent-color);
-    }
-
-    .search-icon {
-      position: absolute;
-      left: 12px;
-      top: 50%;
-      transform: translateY(-50%);
-      color: var(--text-muted);
-      width: 16px;
-      height: 16px;
-    }
-
-    .admin-controls {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
-
-    .toggle-wrapper {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      font-size: 0.85rem;
-      font-weight: 600;
-      color: var(--text-muted);
-      cursor: pointer;
-      user-select: none;
-    }
-
-    .switch {
-      position: relative;
-      display: inline-block;
-      width: 44px;
-      height: 24px;
-    }
-
-    .switch input {
-      opacity: 0;
-      width: 0;
-      height: 0;
-    }
-
-    .slider {
-      position: absolute;
-      cursor: pointer;
-      top: 0; left: 0; right: 0; bottom: 0;
-      background-color: #cbd5e1;
-      transition: .3s;
-      border-radius: 24px;
-    }
-
-    .slider:before {
-      position: absolute;
-      content: "";
-      height: 18px;
-      width: 18px;
-      left: 3px;
-      bottom: 3px;
-      background-color: white;
-      transition: .3s;
-      border-radius: 50%;
-    }
-
-    input:checked + .slider {
-      background-color: var(--accent-color);
-    }
-
-    input:checked + .slider:before {
-      transform: translateX(20px);
-    }
-
-    .btn {
-      padding: 6px 12px;
-      border-radius: 6px;
-      border: 1px solid #cbd5e1;
-      background: white;
-      color: var(--text-main);
-      font-size: 0.85rem;
-      cursor: pointer;
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      font-weight: 500;
-      transition: all 0.2s;
-    }
-
-    .btn:hover {
-      background: #f1f5f9;
-    }
-
-    .btn-primary {
-      background: var(--accent-color);
-      color: white;
-      border-color: var(--accent-color);
-    }
-
-    .btn-primary:hover {
-      background: var(--accent-hover);
-    }
-
-    .btn-danger {
-      color: var(--danger-color);
-      border-color: #fca5a5;
-    }
-
-    .btn-danger:hover {
-      background: #fef2f2;
-    }
-
-    .admin-bar {
-      background: #eff6ff;
-      border-bottom: 1px solid #bfdbfe;
-      padding: 8px 24px;
-      font-size: 0.85rem;
-      color: #1e40af;
-      display: none;
-    }
-
-    .admin-bar-inner {
-      max-width: 1200px;
-      margin: 0 auto;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      flex-wrap: wrap;
-      gap: 12px;
-    }
-
-    body.admin-mode .admin-bar {
-      display: block;
-    }
-
-    main {
-      max-width: 1200px;
-      margin: 32px auto 0;
-      padding: 0 24px;
-    }
-
-    .grid-container {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 32px;
-    }
-
-    @media (max-width: 900px) {
-      .grid-container {
-        grid-template-columns: repeat(2, 1fr);
-      }
-    }
-
-    @media (max-width: 600px) {
-      .grid-container {
-        grid-template-columns: 1fr;
-      }
-    }
-
-    .category-column {
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-    }
-
-    .category-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 4px;
-    }
-
-    .category-title {
-      font-size: 1.2rem;
-      font-weight: 700;
-      color: var(--text-main);
-    }
-
-    .link-card {
-      position: relative;
-      background: var(--card-bg);
-      border: 1.5px solid var(--border-color);
-      border-radius: var(--radius);
-      padding: 12px 16px;
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      text-decoration: none;
-      color: var(--text-main);
-      font-weight: 600;
-      font-size: 0.95rem;
-      transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease;
-      cursor: pointer;
-    }
-
-    .link-card:hover {
-      transform: translateY(-2px);
-      box-shadow: var(--shadow-md);
-      border-color: #000000;
-    }
-
-    .card-icon {
-      width: 24px;
-      height: 24px;
-      flex-shrink: 0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .card-title {
-      flex: 1;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
-
-    .admin-actions {
-      display: none;
-      position: absolute;
-      right: 8px;
-      top: 50%;
-      transform: translateY(-50%);
-      background: rgba(255, 255, 255, 0.95);
-      padding: 2px;
-      border-radius: 4px;
-      gap: 4px;
-      box-shadow: var(--shadow-sm);
-    }
-
-    body.admin-mode .link-card:hover .admin-actions {
-      display: flex;
-    }
-
-    .icon-btn {
-      background: none;
-      border: none;
-      cursor: pointer;
-      padding: 4px;
-      border-radius: 4px;
-      color: var(--text-muted);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .icon-btn:hover {
-      background: #e2e8f0;
-      color: var(--text-main);
-    }
-
-    .icon-btn.delete:hover {
-      background: #fee2e2;
-      color: var(--danger-color);
-    }
-
-    .add-card-btn {
-      display: none;
-      border: 2px dashed #cbd5e1;
-      border-radius: var(--radius);
-      padding: 10px;
-      text-align: center;
-      color: var(--text-muted);
-      cursor: pointer;
-      font-size: 0.9rem;
-      font-weight: 600;
-      background: transparent;
-      width: 100%;
-      transition: all 0.2s;
-    }
-
-    body.admin-mode .add-card-btn {
-      display: block;
-    }
-
-    .add-card-btn:hover {
-      border-color: var(--accent-color);
-      color: var(--accent-color);
-      background: #f0f9ff;
-    }
-
-    .add-category-btn {
-      display: none;
-      border: 2px dashed #cbd5e1;
-      border-radius: var(--radius);
-      padding: 24px;
-      text-align: center;
-      color: var(--text-muted);
-      cursor: pointer;
-      font-weight: 600;
-      background: transparent;
-      width: 100%;
-      transition: all 0.2s;
-      min-height: 150px;
-      align-items: center;
-      justify-content: center;
-    }
-
-    body.admin-mode .add-category-btn {
-      display: flex;
-    }
-
-    .add-category-btn:hover {
-      border-color: var(--accent-color);
-      color: var(--accent-color);
-      background: #f0f9ff;
-    }
-
-    /* Modal Styles */
-    .modal-overlay {
-      display: none;
-      position: fixed;
-      top: 0; left: 0; right: 0; bottom: 0;
-      background: rgba(0,0,0,0.5);
-      z-index: 1000;
-      align-items: center;
-      justify-content: center;
-      padding: 16px;
-    }
-
-    .modal-overlay.active {
-      display: flex;
-    }
-
-    .modal {
-      background: white;
-      border-radius: 12px;
-      padding: 24px;
-      width: 100%;
-      max-width: 440px;
-      box-shadow: 0 20px 25px -5px rgba(0,0,0,0.1);
-    }
-
-    .modal-header {
-      font-size: 1.15rem;
-      font-weight: 700;
-      margin-bottom: 16px;
-    }
-
-    .form-group {
-      margin-bottom: 16px;
-    }
-
-    .form-label {
-      display: block;
-      font-size: 0.85rem;
-      font-weight: 600;
-      margin-bottom: 6px;
-      color: var(--text-main);
-    }
-
-    .form-input, .form-select {
-      width: 100%;
-      padding: 8px 12px;
-      border: 1px solid #cbd5e1;
-      border-radius: 6px;
-      font-size: 0.95rem;
-      outline: none;
-    }
-
-    .form-input:focus, .form-select:focus {
-      border-color: var(--accent-color);
-    }
-
-    .modal-actions {
-      display: flex;
-      justify-content: flex-end;
-      gap: 8px;
-      margin-top: 24px;
-    }
-
-    .password-error {
-      color: var(--danger-color);
-      font-size: 0.85rem;
-      margin-top: 6px;
-      display: none;
-    }
-
-    .empty-search {
-      display: none;
-      text-align: center;
-      padding: 40px;
-      color: var(--text-muted);
-      grid-column: 1 / -1;
-    }
+    .header-container { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; }
+    .search-box { position: relative; flex: 1; max-width: 400px; }
+    .search-input { width: 100%; padding: 8px 16px 8px 36px; border: 1px solid #cbd5e1; border-radius: 20px; font-size: 0.9rem; outline: none; transition: border-color 0.2s; }
+    .search-input:focus { border-color: var(--accent-color); }
+    .search-icon { position: absolute; left: 12px; top: 50%; transform: translateY(-50%); color: var(--text-muted); width: 16px; height: 16px; }
+    .admin-controls { display: flex; align-items: center; gap: 12px; }
+    .toggle-wrapper { display: flex; align-items: center; gap: 8px; font-size: 0.85rem; font-weight: 600; color: var(--text-muted); cursor: pointer; user-select: none; }
+    .switch { position: relative; display: inline-block; width: 44px; height: 24px; }
+    .switch input { opacity: 0; width: 0; height: 0; }
+    .slider { position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0; background-color: #cbd5e1; transition: .3s; border-radius: 24px; }
+    .slider:before { position: absolute; content: ""; height: 18px; width: 18px; left: 3px; bottom: 3px; background-color: white; transition: .3s; border-radius: 50%; }
+    input:checked + .slider { background-color: var(--accent-color); }
+    input:checked + .slider:before { transform: translateX(20px); }
+    .btn { padding: 6px 12px; border-radius: 6px; border: 1px solid #cbd5e1; background: white; color: var(--text-main); font-size: 0.85rem; cursor: pointer; display: inline-flex; align-items: center; gap: 6px; font-weight: 500; transition: all 0.2s; }
+    .btn:hover { background: #f1f5f9; }
+    .btn-primary { background: var(--accent-color); color: white; border-color: var(--accent-color); }
+    .btn-primary:hover { background: var(--accent-hover); }
+    .btn-danger { color: var(--danger-color); border-color: #fca5a5; }
+    .btn-danger:hover { background: #fef2f2; }
+    .admin-bar { background: #eff6ff; border-bottom: 1px solid #bfdbfe; padding: 8px 24px; font-size: 0.85rem; color: #1e40af; display: none; }
+    .admin-bar-inner { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; }
+    body.admin-mode .admin-bar { display: block; }
+    main { max-width: 1200px; margin: 32px auto 0; padding: 0 24px; }
+    .grid-container { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; }
+    @media (max-width: 900px) { .grid-container { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 600px) { .grid-container { grid-template-columns: 1fr; } }
+    .category-column { display: flex; flex-direction: column; gap: 12px; }
+    .category-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px; }
+    .category-title { font-size: 1.2rem; font-weight: 700; color: var(--text-main); }
+    .link-card { position: relative; background: var(--card-bg); border: 1.5px solid var(--border-color); border-radius: var(--radius); padding: 12px 16px; display: flex; align-items: center; gap: 12px; text-decoration: none; color: var(--text-main); font-weight: 600; font-size: 0.95rem; transition: transform 0.15s ease, box-shadow 0.15s ease; cursor: pointer; }
+    .link-card:hover { transform: translateY(-2px); box-shadow: var(--shadow-md); border-color: #000000; }
+    .card-icon { width: 24px; height: 24px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; }
+    .card-title { flex: 1; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .admin-actions { display: none; position: absolute; right: 8px; top: 50%; transform: translateY(-50%); background: rgba(255, 255, 255, 0.95); padding: 2px; border-radius: 4px; gap: 4px; box-shadow: var(--shadow-sm); }
+    body.admin-mode .link-card:hover .admin-actions { display: flex; }
+    .icon-btn { background: none; border: none; cursor: pointer; padding: 4px; border-radius: 4px; color: var(--text-muted); display: flex; align-items: center; justify-content: center; }
+    .icon-btn:hover { background: #e2e8f0; color: var(--text-main); }
+    .icon-btn.delete:hover { background: #fee2e2; color: var(--danger-color); }
+    .add-card-btn, .add-category-btn { display: none; border: 2px dashed #cbd5e1; border-radius: var(--radius); padding: 10px; text-align: center; color: var(--text-muted); cursor: pointer; font-size: 0.9rem; font-weight: 600; background: transparent; width: 100%; transition: all 0.2s; }
+    body.admin-mode .add-card-btn { display: block; }
+    body.admin-mode .add-category-btn { display: flex; justify-content: center; align-items: center; min-height: 150px; }
+    .add-card-btn:hover, .add-category-btn:hover { border-color: var(--accent-color); color: var(--accent-color); background: #f0f9ff; }
+    .modal-overlay { display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.5); z-index: 1000; align-items: center; justify-content: center; padding: 16px; }
+    .modal-overlay.active { display: flex; }
+    .modal { background: white; border-radius: 12px; padding: 24px; width: 100%; max-width: 440px; box-shadow: 0 20px 25px -5px rgba(0,0,0,0.1); }
+    .modal-header { font-size: 1.15rem; font-weight: 700; margin-bottom: 16px; }
+    .form-group { margin-bottom: 16px; }
+    .form-label { display: block; font-size: 0.85rem; font-weight: 600; margin-bottom: 6px; }
+    .form-input, .form-select { width: 100%; padding: 8px 12px; border: 1px solid #cbd5e1; border-radius: 6px; font-size: 0.95rem; outline: none; }
+    .modal-actions { display: flex; justify-content: flex-end; gap: 8px; margin-top: 24px; }
+    .password-error { color: var(--danger-color); font-size: 0.85rem; margin-top: 6px; display: none; }
+    .empty-search { display: none; text-align: center; padding: 40px; color: var(--text-muted); grid-column: 1 / -1; }
   </style>
+
+  <!-- Supabase SDK (無料リアルタイム同期) -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
 <body>
 
@@ -482,12 +110,11 @@
 
   <div class="admin-bar">
     <div class="admin-bar-inner">
-      <span>🔒 <strong>管理モード編集中</strong> (生徒閲覧画面には編集ボタンは表示されません)</span>
+      <span>🔒 <strong>管理モード編集中</strong>（編集後に「全員に更新を反映」を押します）</span>
       <div style="display:flex; gap:8px;">
+        <button class="btn btn-primary" onclick="publishToAll()">🚀 全員に更新を反映</button>
         <button class="btn" onclick="openPasswordModal()">🔑 パスワード変更</button>
-        <button class="btn" onclick="exportData()">📥 設定を保存(JSON)</button>
-        <button class="btn" onclick="importData()">📤 設定を読み込み</button>
-        <button class="btn btn-danger" onclick="resetToDefault()">🔄 初期状態に戻す</button>
+        <button class="btn btn-danger" onclick="resetToDefault()">🔄 初期データに戻す</button>
       </div>
     </div>
   </div>
@@ -497,19 +124,17 @@
     <div id="emptySearch" class="empty-search">該当するリンクが見つかりません。</div>
   </main>
 
-  <!-- パスワード認証 modal -->
+  <!-- モーダル各種 -->
   <div class="modal-overlay" id="authModal">
     <div class="modal">
       <div class="modal-header">管理者認証</div>
       <form onsubmit="handleAuthSubmit(event)">
         <div class="form-group">
-          <label class="form-label" for="authPassword">パスワードを入力してください</label>
-          <input type="password" id="authPassword" class="form-input" placeholder="パスワード" required autofocus>
+          <label class="form-label">パスワードを入力してください</label>
+          <input type="password" id="authPassword" class="form-input" required autofocus>
           <div id="authError" class="password-error">パスワードが違います</div>
         </div>
-        <div style="font-size: 0.8rem; color: var(--text-muted); margin-bottom: 12px;">
-          ※初期パスワード: <code>admin123</code>
-        </div>
+        <div style="font-size: 0.8rem; color: var(--text-muted); margin-bottom: 12px;">初期パスワード: <code>admin123</code></div>
         <div class="modal-actions">
           <button type="button" class="btn" onclick="closeAuthModal()">キャンセル</button>
           <button type="submit" class="btn btn-primary">認証</button>
@@ -518,17 +143,16 @@
     </div>
   </div>
 
-  <!-- パスワード変更 modal -->
   <div class="modal-overlay" id="changePasswordModal">
     <div class="modal">
       <div class="modal-header">管理者パスワードの変更</div>
       <form onsubmit="handleChangePasswordSubmit(event)">
         <div class="form-group">
-          <label class="form-label" for="currentPassword">現在のパスワード</label>
+          <label class="form-label">現在のパスワード</label>
           <input type="password" id="currentPassword" class="form-input" required>
         </div>
         <div class="form-group">
-          <label class="form-label" for="newPassword">新しいパスワード</label>
+          <label class="form-label">新しいパスワード</label>
           <input type="password" id="newPassword" class="form-input" minlength="4" required>
         </div>
         <div id="changePasswordError" class="password-error">現在のパスワードが間違っています</div>
@@ -540,26 +164,22 @@
     </div>
   </div>
 
-  <!-- カード編集/追加 modal -->
   <div class="modal-overlay" id="cardModal">
     <div class="modal">
       <div class="modal-header" id="cardModalTitle">リンクの追加</div>
       <form onsubmit="handleCardSubmit(event)">
         <input type="hidden" id="cardCatIndex">
         <input type="hidden" id="cardLinkIndex">
-
         <div class="form-group">
-          <label class="form-label" for="cardTitleInput">タイトル</label>
+          <label class="form-label">タイトル</label>
           <input type="text" id="cardTitleInput" class="form-input" required placeholder="例: ミライシード">
         </div>
-
         <div class="form-group">
-          <label class="form-label" for="cardUrlInput">URL</label>
+          <label class="form-label">URL</label>
           <input type="url" id="cardUrlInput" class="form-input" required placeholder="https://...">
         </div>
-
         <div class="form-group">
-          <label class="form-label" for="cardIconSelect">アイコン</label>
+          <label class="form-label">アイコン</label>
           <select id="cardIconSelect" class="form-select">
             <option value="globe">🌐 地球儀 (Webサイト)</option>
             <option value="pen">✏️ ペン (アンケート・記述)</option>
@@ -570,7 +190,6 @@
             <option value="star">⭐ お気に入り</option>
           </select>
         </div>
-
         <div class="modal-actions">
           <button type="button" class="btn" onclick="closeCardModal()">キャンセル</button>
           <button type="submit" class="btn btn-primary">保存</button>
@@ -580,145 +199,162 @@
   </div>
 
   <script>
-    // SVG Icons Map
+    // ----------------------------------------------------
+    // 1. Supabaseの設定 (下の2行をご自身のキーに置き換えてください)
+    // ----------------------------------------------------
+    const SUPABASE_URL = "https://YOUR_PROJECT_ID.supabase.co";
+    const SUPABASE_ANON_KEY = "YOUR_SUPABASE_ANON_KEY";
+
+    let supabaseClient = null;
+    if (SUPABASE_URL !== "https://YOUR_PROJECT_ID.supabase.co") {
+      supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+    }
+
     const ICONS = {
-      globe: `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>`,
-      pen: `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"></path><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path></svg>`,
-      doc: `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line></svg>`,
-      video: `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="2.18" ry="2.18"></rect><line x1="7" y1="2" x2="7" y2="22"></line><line x1="17" y1="2" x2="17" y2="22"></line><line x1="2" y1="12" x2="22" y2="12"></line></svg>`,
-      book: `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg>`,
-      search: `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>`,
-      star: `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>`
+      globe: `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>`,
+      pen: `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9"></path><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path></svg>`,
+      doc: `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line></svg>`,
+      video: `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="2.18" ry="2.18"></rect><line x1="7" y1="2" x2="7" y2="22"></line><line x1="17" y1="2" x2="17" y2="22"></line><line x1="2" y1="12" x2="22" y2="12"></line></svg>`,
+      book: `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg>`,
+      search: `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>`,
+      star: `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>`
     };
 
-    // 初期データ構造
-    const DEFAULT_DATA = {
-      categories: [
-        {
-          title: "学習・教材",
-          links: [
-            { title: "Jモラルポータル", url: "#", icon: "doc" },
-            { title: "英語新教材", url: "#", icon: "doc" },
-            { title: "振り返り学習教材", url: "#", icon: "doc" },
-            { title: "ミライシード", url: "#", icon: "globe" },
-            { title: "クラウドログイン", url: "#", icon: "globe" }
-          ]
-        },
-        {
-          title: "キャリア教育",
-          links: [
-            { title: "おしごとナビ", url: "#", icon: "globe" },
-            { title: "未来の仕事 | 学研キッズネット", url: "#", icon: "globe" },
-            { title: "【職業一覧】なるにはナビ", url: "#", icon: "globe" }
-          ]
-        },
-        {
-          title: "画像・動画教材",
-          links: [
-            { title: "動画等教材", url: "#", icon: "doc" },
-            { title: "NHK for School", url: "#", icon: "video" },
-            { title: "NHK動画", url: "#", icon: "video" }
-          ]
-        },
-        {
-          title: "図書館蔵書検索",
-          links: [
-            { title: "校内図書館蔵書検索", url: "#", icon: "book" }
-          ]
-        },
-        {
-          title: "調べ学習",
-          links: [
-            { title: "キッズすたっと～探そう統計データ～", url: "#", icon: "search" }
-          ]
-        }
-      ]
-    };
+    const DEFAULT_DATA = [
+      {
+        title: "学習・教材",
+        links: [
+          { title: "Jモラルポータル", url: "#", icon: "doc" },
+          { title: "英語新教材", url: "#", icon: "doc" },
+          { title: "振り返り学習教材", url: "#", icon: "doc" },
+          { title: "ミライシード", url: "#", icon: "globe" },
+          { title: "クラウドログイン", url: "#", icon: "globe" }
+        ]
+      },
+      {
+        title: "キャリア教育",
+        links: [
+          { title: "おしごとナビ", url: "#", icon: "globe" },
+          { title: "未来の仕事 | 学研キッズネット", url: "#", icon: "globe" },
+          { title: "【職業一覧】なるにはナビ", url: "#", icon: "globe" }
+        ]
+      },
+      {
+        title: "画像・動画教材",
+        links: [
+          { title: "動画等教材", url: "#", icon: "doc" },
+          { title: "NHK for School", url: "#", icon: "video" },
+          { title: "NHK動画", url: "#", icon: "video" }
+        ]
+      },
+      {
+        title: "図書館蔵書検索",
+        links: [{ title: "校内図書館蔵書検索", url: "#", icon: "book" }]
+      },
+      {
+        title: "調べ学習",
+        links: [{ title: "キッズすたっと～探そう統計データ～", url: "#", icon: "search" }]
+      }
+    ];
 
     let siteData = [];
     let isAdmin = false;
     let adminPassword = localStorage.getItem("portal_admin_pw") || "admin123";
 
-    // 初期化
-    function init() {
-      const savedData = localStorage.getItem("portal_site_data");
-      if (savedData) {
-        try {
-          siteData = JSON.parse(savedData);
-        } catch (e) {
-          siteData = DEFAULT_DATA.categories;
+    async function init() {
+      if (supabaseClient) {
+        // Supabaseからデータ読み込み
+        const { data, error } = await supabaseClient.from('portal_settings').select('data').eq('id', 1).single();
+        if (data && data.data) {
+          siteData = data.data;
+        } else {
+          siteData = DEFAULT_DATA;
         }
+
+        // リアルタイム変更検知
+        supabaseClient
+          .channel('public:portal_settings')
+          .on('postgres_changes', { event: 'UPDATE', schema: 'public', table: 'portal_settings' }, payload => {
+            if (payload.new && payload.new.data) {
+              siteData = payload.new.data;
+              render();
+            }
+          })
+          .subscribe();
       } else {
-        siteData = DEFAULT_DATA.categories;
+        const savedData = localStorage.getItem("portal_site_data");
+        siteData = savedData ? JSON.parse(savedData) : DEFAULT_DATA;
       }
       render();
     }
 
-    // 保存
-    function saveData() {
+    async function publishToAll() {
+      if (!supabaseClient) {
+        alert("Supabaseの設定がされていません。下記の初期設定手順を行ってください。");
+        return;
+      }
+
+      const { error } = await supabaseClient.from('portal_settings').upsert({ id: 1, data: siteData });
+      if (error) {
+        alert("更新に失敗しました: " + error.message);
+      } else {
+        alert("✨ 全員の画面に更新を反映しました！");
+      }
+    }
+
+    function saveDataLocal() {
       localStorage.setItem("portal_site_data", JSON.stringify(siteData));
       render();
     }
 
-    // 描画
     function render() {
       const container = document.getElementById("gridContainer");
       container.innerHTML = "";
-
       const query = document.getElementById("searchInput").value.toLowerCase();
       let totalVisible = 0;
 
       siteData.forEach((cat, catIdx) => {
-        const filteredLinks = cat.links.filter(l => l.title.toLowerCase().includes(query));
-        
+        const filteredLinks = (cat.links || []).filter(l => l.title.toLowerCase().includes(query));
         if (query && filteredLinks.length === 0) return;
 
         const col = document.createElement("div");
         col.className = "category-column";
 
-        // カテゴリヘッダー
         const catHeader = document.createElement("div");
         catHeader.className = "category-header";
         catHeader.innerHTML = `
           <h2 class="category-title">${escapeHtml(cat.title)}</h2>
           ${isAdmin ? `
             <div style="display:flex; gap:4px;">
-              <button class="icon-btn" onclick="editCategoryTitle(${catIdx})" title="カテゴリ名を編集">✏️</button>
-              <button class="icon-btn delete" onclick="deleteCategory(${catIdx})" title="カテゴリを削除">🗑️</button>
+              <button class="icon-btn" onclick="editCategoryTitle(${catIdx})">✏️</button>
+              <button class="icon-btn delete" onclick="deleteCategory(${catIdx})">🗑️</button>
             </div>
           ` : ""}
         `;
         col.appendChild(catHeader);
 
-        // リンクカード
-        const linksToRender = query ? filteredLinks : cat.links;
+        const linksToRender = query ? filteredLinks : (cat.links || []);
         linksToRender.forEach((link) => {
-          const originalLinkIdx = cat.links.indexOf(link);
+          const originalLinkIdx = (cat.links || []).indexOf(link);
           totalVisible++;
           const card = document.createElement("a");
           card.className = "link-card";
           card.href = link.url || "#";
-          if (link.url && link.url !== "#") {
-            card.target = "_blank";
-            card.rel = "noopener noreferrer";
-          }
-
-          const iconSvg = ICONS[link.icon] || ICONS.globe;
+          if (link.url && link.url !== "#") { card.target = "_blank"; card.rel = "noopener noreferrer"; }
 
           card.innerHTML = `
-            <span class="card-icon">${iconSvg}</span>
-            <span class="card-title" title="${escapeHtml(link.title)}">${escapeHtml(link.title)}</span>
+            <span class="card-icon">${ICONS[link.icon] || ICONS.globe}</span>
+            <span class="card-title">${escapeHtml(link.title)}</span>
             ${isAdmin ? `
               <div class="admin-actions" onclick="event.preventDefault(); event.stopPropagation();">
-                <button class="icon-btn" onclick="openCardModal(${catIdx},${originalLinkIdx})" title="編集">✏️</button>
-                <button class="icon-btn delete" onclick="deleteCard(${catIdx},${originalLinkIdx})" title="削除">🗑️</button>
+                <button class="icon-btn" onclick="openCardModal(${catIdx},${originalLinkIdx})">✏️</button>
+                <button class="icon-btn delete" onclick="deleteCard(${catIdx},${originalLinkIdx})">🗑️</button>
               </div>
             ` : ""}
           `;
           col.appendChild(card);
         });
 
-        // リンク追加ボタン (管理モード時)
         if (isAdmin && !query) {
           const addBtn = document.createElement("button");
           addBtn.className = "add-card-btn";
@@ -730,7 +366,6 @@
         container.appendChild(col);
       });
 
-      // 新規カテゴリ追加ボタン (管理モード時)
       if (isAdmin && !query) {
         const addCatBtn = document.createElement("button");
         addCatBtn.className = "add-category-btn";
@@ -739,32 +374,20 @@
         container.appendChild(addCatBtn);
       }
 
-      // 検索結果0件表示
-      const emptySearch = document.getElementById("emptySearch");
-      if (query && totalVisible === 0) {
-        emptySearch.style.display = "block";
-      } else {
-        emptySearch.style.display = "none";
-      }
+      document.getElementById("emptySearch").style.display = (query && totalVisible === 0) ? "block" : "none";
     }
 
-    // エスケープ処理
     function escapeHtml(str) {
-      return str.replace(/[&<>"']/g, function(m) {
-        return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#039;' }[m];
-      });
+      return (str || "").replace(/[&<>"']/g, m => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#039;' }[m]));
     }
 
-    // 管理トグル処理
     document.getElementById("adminToggle").addEventListener("change", function(e) {
       if (e.target.checked) {
-        // パスワード入力ダイアログを表示
         document.getElementById("authPassword").value = "";
         document.getElementById("authError").style.display = "none";
         document.getElementById("authModal").classList.add("active");
-        e.target.checked = false; // 一旦チェックを戻す
+        e.target.checked = false;
       } else {
-        // ロック解除
         isAdmin = false;
         document.body.classList.remove("admin-mode");
         render();
@@ -773,8 +396,7 @@
 
     function handleAuthSubmit(e) {
       e.preventDefault();
-      const input = document.getElementById("authPassword").value;
-      if (input === adminPassword) {
+      if (document.getElementById("authPassword").value === adminPassword) {
         isAdmin = true;
         document.body.classList.add("admin-mode");
         document.getElementById("adminToggle").checked = true;
@@ -785,11 +407,8 @@
       }
     }
 
-    function closeAuthModal() {
-      document.getElementById("authModal").classList.remove("active");
-    }
+    function closeAuthModal() { document.getElementById("authModal").classList.remove("active"); }
 
-    // パスワード変更
     function openPasswordModal() {
       document.getElementById("currentPassword").value = "";
       document.getElementById("newPassword").value = "";
@@ -797,55 +416,48 @@
       document.getElementById("changePasswordModal").classList.add("active");
     }
 
-    function closePasswordModal() {
-      document.getElementById("changePasswordModal").classList.remove("active");
-    }
+    function closePasswordModal() { document.getElementById("changePasswordModal").classList.remove("active"); }
 
     function handleChangePasswordSubmit(e) {
       e.preventDefault();
       const curr = document.getElementById("currentPassword").value;
       const next = document.getElementById("newPassword").value;
-
       if (curr !== adminPassword) {
         document.getElementById("changePasswordError").style.display = "block";
         return;
       }
-
       adminPassword = next;
       localStorage.setItem("portal_admin_pw", next);
       alert("管理者パスワードを変更しました。");
       closePasswordModal();
     }
 
-    // カテゴリ追加・編集
     function addNewCategory() {
-      const title = prompt("新しいカテゴリの名前を入力してください:");
+      const title = prompt("新しいカテゴリの名前:");
       if (title && title.trim()) {
         siteData.push({ title: title.trim(), links: [] });
-        saveData();
+        saveDataLocal();
       }
     }
 
     function editCategoryTitle(catIdx) {
-      const newTitle = prompt("カテゴリ名を入力:", siteData[catIdx].title);
+      const newTitle = prompt("カテゴリ名:", siteData[catIdx].title);
       if (newTitle && newTitle.trim()) {
         siteData[catIdx].title = newTitle.trim();
-        saveData();
+        saveDataLocal();
       }
     }
 
     function deleteCategory(catIdx) {
-      if (confirm(`カテゴリ「${siteData[catIdx].title}」と含まれるすべてのリンクを削除しますか？`)) {
+      if (confirm(`「${siteData[catIdx].title}」を削除しますか？`)) {
         siteData.splice(catIdx, 1);
-        saveData();
+        saveDataLocal();
       }
     }
 
-    // カード追加・編集 Modal 処理
     function openCardModal(catIdx, linkIdx) {
       document.getElementById("cardCatIndex").value = catIdx;
       document.getElementById("cardLinkIndex").value = linkIdx !== null ? linkIdx : "";
-      
       if (linkIdx !== null) {
         const link = siteData[catIdx].links[linkIdx];
         document.getElementById("cardModalTitle").innerText = "リンクの編集";
@@ -858,13 +470,10 @@
         document.getElementById("cardUrlInput").value = "https://";
         document.getElementById("cardIconSelect").value = "globe";
       }
-
       document.getElementById("cardModal").classList.add("active");
     }
 
-    function closeCardModal() {
-      document.getElementById("cardModal").classList.remove("active");
-    }
+    function closeCardModal() { document.getElementById("cardModal").classList.remove("active"); }
 
     function handleCardSubmit(e) {
       e.preventDefault();
@@ -874,73 +483,33 @@
       const url = document.getElementById("cardUrlInput").value.trim();
       const icon = document.getElementById("cardIconSelect").value;
 
-      const newCardData = { title, url, icon };
+      if (!siteData[catIdx].links) siteData[catIdx].links = [];
 
       if (linkIdxVal !== "") {
-        siteData[catIdx].links[parseInt(linkIdxVal)] = newCardData;
+        siteData[catIdx].links[parseInt(linkIdxVal)] = { title, url, icon };
       } else {
-        siteData[catIdx].links.push(newCardData);
+        siteData[catIdx].links.push({ title, url, icon });
       }
 
       closeCardModal();
-      saveData();
+      saveDataLocal();
     }
 
     function deleteCard(catIdx, linkIdx) {
-      if (confirm("このリンクボタンを削除しますか？")) {
+      if (confirm("このリンクを削除しますか？")) {
         siteData[catIdx].links.splice(linkIdx, 1);
-        saveData();
+        saveDataLocal();
       }
-    }
-
-    // インポート・エクスポート・リセット
-    function exportData() {
-      const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(siteData, null, 2));
-      const downloadAnchor = document.createElement('a');
-      downloadAnchor.setAttribute("href", dataStr);
-      downloadAnchor.setAttribute("download", "portal_config.json");
-      document.body.appendChild(downloadAnchor);
-      downloadAnchor.click();
-      downloadAnchor.remove();
-    }
-
-    function importData() {
-      const input = document.createElement('input');
-      input.type = 'file';
-      input.accept = 'application/json';
-      input.onchange = e => {
-        const file = e.target.files[0];
-        const reader = new FileReader();
-        reader.onload = event => {
-          try {
-            const imported = JSON.parse(event.target.result);
-            if (Array.isArray(imported)) {
-              siteData = imported;
-              saveData();
-              alert("設定を正常に読み込みました。");
-            } else {
-              alert("正しい設定ファイルではありません。");
-            }
-          } catch (err) {
-            alert("JSONファイルの解析に失敗しました。");
-          }
-        };
-        reader.readAsText(file);
-      };
-      input.click();
     }
 
     function resetToDefault() {
-      if (confirm("初期状態（サンプルデータ）に戻しますか？追加したリンクや変更は消去されます。")) {
-        siteData = JSON.parse(JSON.stringify(DEFAULT_DATA.categories));
-        saveData();
+      if (confirm("初期状態に戻しますか？")) {
+        siteData = JSON.parse(JSON.stringify(DEFAULT_DATA));
+        saveDataLocal();
       }
     }
 
-    // 検索イベントリスナー
     document.getElementById("searchInput").addEventListener("input", render);
-
-    // 起動
     init();
   </script>
 </body>
