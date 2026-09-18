@@ -1,0 +1,61 @@
+<script>
+  // ----------------------------------------------------
+  // ★ Supabaseの設定
+  // ----------------------------------------------------
+  const SUPABASE_URL = "https://fhlmyrgqkglbewpcuvys.supabase.co";
+  const SUPABASE_ANON_KEY = "sb_publishable_4bhgB9RdwGVsij7K48bkxg_p-L8Ma4t";
+
+  let supabaseClient = null;
+  // 条件式を修正：URLとKEYが入力されていれば初期化
+  if (SUPABASE_URL && SUPABASE_ANON_KEY) {
+    supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+  }
+
+  // （中略 ... ICONS, DEFAULT_DATA 等はそのまま）
+
+  async function init() {
+    if (supabaseClient) {
+      try {
+        const { data, error } = await supabaseClient
+          .from('portal_settings')
+          .select('data')
+          .eq('id', 1)
+          .maybeSingle();
+
+        if (data && data.data) {
+          siteData = parseData(data.data);
+        } else {
+          siteData = DEFAULT_DATA;
+        }
+      } catch (err) {
+        console.error("Supabase load error:", err);
+        siteData = DEFAULT_DATA;
+      }
+      render();
+
+      // リアルタイム同期の監視
+      supabaseClient
+        .channel('schema-db-changes')
+        .on(
+          'postgres_changes',
+          { event: '*', schema: 'public', table: 'portal_settings' },
+          (payload) => {
+            if (payload.new && payload.new.data) {
+              // 編集中（adminMode）でなければ自動更新を反映
+              if (!isAdmin) {
+                siteData = parseData(payload.new.data);
+                render();
+              }
+            }
+          }
+        )
+        .subscribe();
+    } else {
+      const savedData = localStorage.getItem("portal_site_data");
+      siteData = savedData ? JSON.parse(savedData) : DEFAULT_DATA;
+      render();
+    }
+  }
+
+  // （以下略）
+</script>
