@@ -81,7 +81,7 @@
     .empty-search { display: none; text-align: center; padding: 40px; color: var(--text-muted); grid-column: 1 / -1; }
   </style>
 
-  <!-- Supabase SDK (無料リアルタイム同期) -->
+  <!-- Supabase SDK -->
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
 <body>
@@ -200,7 +200,7 @@
 
   <script>
     // ----------------------------------------------------
-    // 1. Supabaseの設定 (下の2行をご自身のキーに置き換えてください)
+    // ★ Supabaseの設定（プロジェクトのKeyに書き換えてください）
     // ----------------------------------------------------
     const SUPABASE_URL = "https://YOUR_PROJECT_ID.supabase.co";
     const SUPABASE_ANON_KEY = "YOUR_SUPABASE_ANON_KEY";
@@ -263,7 +263,6 @@
 
     async function init() {
       if (supabaseClient) {
-        // Supabaseからデータ読み込み
         const { data, error } = await supabaseClient.from('portal_settings').select('data').eq('id', 1).single();
         if (data && data.data) {
           siteData = data.data;
@@ -271,7 +270,6 @@
           siteData = DEFAULT_DATA;
         }
 
-        // リアルタイム変更検知
         supabaseClient
           .channel('public:portal_settings')
           .on('postgres_changes', { event: 'UPDATE', schema: 'public', table: 'portal_settings' }, payload => {
@@ -290,7 +288,7 @@
 
     async function publishToAll() {
       if (!supabaseClient) {
-        alert("Supabaseの設定がされていません。下記の初期設定手順を行ってください。");
+        alert("Supabaseの設定が完了していません。コード内のSUPABASE_URLとSUPABASE_ANON_KEYを設定してください。");
         return;
       }
 
