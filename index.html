@@ -200,7 +200,7 @@
 
   <script>
     // ----------------------------------------------------
-    // ★ Supabaseの設定（プロジェクトのKeyに書き換えてください）
+    // ★ Supabaseの設定（ご自身のプロジェクトの値に書き換えてください）
     // ----------------------------------------------------
     const SUPABASE_URL = "https://fhlmyrgqkglbewpcuvys.supabase.co";
     const SUPABASE_ANON_KEY = "sb_publishable_4bhgB9RdwGVsij7K48bkxg_p-L8Ma4t";
@@ -261,42 +261,63 @@
     let isAdmin = false;
     let adminPassword = localStorage.getItem("portal_admin_pw") || "admin123";
 
+    // --- 安全にJSONパースする処理 ---
+    function parseData(rawData) {
+      if (!rawData) return DEFAULT_DATA;
+      if (typeof rawData === "string") {
+        try { return JSON.parse(rawData); } catch (e) { return DEFAULT_DATA; }
+      }
+      return rawData;
+    }
+
     async function init() {
       if (supabaseClient) {
-        const { data, error } = await supabaseClient.from('portal_settings').select('data').eq('id', 1).single();
+        // 初回ロード（キャッシュ回避のため即時取得）
+        const { data, error } = await supabaseClient.from('portal_settings').select('data').eq('id', 1).maybeSingle();
         if (data && data.data) {
-          siteData = data.data;
+          siteData = parseData(data.data);
         } else {
           siteData = DEFAULT_DATA;
         }
+        render();
 
+        // リアルタイム同期監視（修正箇所：全イベントを検知）
         supabaseClient
-          .channel('public:portal_settings')
-          .on('postgres_changes', { event: 'UPDATE', schema: 'public', table: 'portal_settings' }, payload => {
-            if (payload.new && payload.new.data) {
-              siteData = payload.new.data;
-              render();
+          .channel('schema-db-changes')
+          .on(
+            'postgres_changes',
+            { event: '*', schema: 'public', table: 'portal_settings' },
+            (payload) => {
+              if (payload.new && payload.new.data) {
+                siteData = parseData(payload.new.data);
+                render();
+              }
             }
-          })
+          )
           .subscribe();
       } else {
         const savedData = localStorage.getItem("portal_site_data");
         siteData = savedData ? JSON.parse(savedData) : DEFAULT_DATA;
+        render();
       }
-      render();
     }
 
     async function publishToAll() {
       if (!supabaseClient) {
-        alert("Supabaseの設定が完了していません。コード内のSUPABASE_URLとSUPABASE_ANON_KEYを設定してください。");
+        alert("Supabaseの設定が完了していません。SUPABASE_URL と SUPABASE_ANON_KEY を設定してください。");
         return;
       }
 
-      const { error } = await supabaseClient.from('portal_settings').upsert({ id: 1, data: siteData });
+      // Upsert実行
+      const { error } = await supabaseClient.from('portal_settings').upsert({
+        id: 1,
+        data: siteData
+      });
+
       if (error) {
-        alert("更新に失敗しました: " + error.message);
+        alert("⚠️ 更新に失敗しました:\n" + error.message + "\n\nSupabaseのSQL Editorでポリシー許可（RLS）が設定されているか確認してください。");
       } else {
-        alert("✨ 全員の画面に更新を反映しました！");
+        alert("✨ 全員の画面に即時反映しました！");
       }
     }
 
